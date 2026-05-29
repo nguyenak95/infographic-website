@@ -3,14 +3,15 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Features from '../components/Features.astro';
 import HowItWorks from '../components/HowItWorks.astro';
-import Gallery from '../components/Gallery.tsx';
+import { GalleryContainer } from '../components/GalleryContainer.tsx';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="NotebookLM Infographics" description="Agentic Infographic Intelligence - Build beautiful, highly-customized infographics with the NotebookLM CLI.">
+<Layout title="AI Agent Infographics" description="Agentic Infographic Intelligence - Build beautiful, highly-customized infographics with our AI Agent Skill calling different providers.">
   <Hero />
   <Features />
   <HowItWorks />
-  <Gallery client:load />
+  <GalleryContainer client:load />
   <Footer />
 </Layout>
+
