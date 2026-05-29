@@ -94,6 +94,15 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
 }) => {
   const t = TRANSLATIONS[lang];
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   // Active Featured Hero Details
   const activeHeroItem = featuredItems.find(item => item.metadata.id === activeFeaturedHeroId) || featuredItems[0];
   const activeHeroDetails = activeHeroItem ? SHOWCASE_DETAILS[activeHeroItem.metadata.id] : null;
@@ -187,7 +196,10 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
             
             {/* Left Column - Large Focused Hero Card (Span 2) */}
             {activeHeroItem && (
-              <div className="lg:col-span-2 group relative h-[500px] lg:h-[600px] bg-zinc-900/40 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl transition-all duration-300">
+              <div 
+                onMouseMove={handleMouseMove}
+                className="lg:col-span-2 group relative h-[500px] lg:h-[600px] glass-premium cursor-glow-border border-white/5 rounded-3xl overflow-hidden shadow-2xl transition-all duration-300"
+              >
                 
                 {/* Background glowing ambient drop shadow */}
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent z-1 bg-cover bg-center" style={{ backgroundImage: `url(${activeHeroItem.image_path})`, filter: 'blur(30px) opacity(0.15)' }} />
@@ -279,18 +291,18 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                   </div>
 
                   {/* Quick Action controls */}
-                  <div className="flex flex-wrap gap-4 pt-6 border-t border-zinc-900">
+                  <div className="flex flex-wrap gap-4 pt-6 border-t border-white/5">
                     <button
                       type="button"
                       onClick={() => handleUsePrompt(activeHeroDetails?.demoPrompt || activeHeroItem.prompt)}
-                      className="px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-bold rounded-xl transition-all duration-200 shadow-lg shadow-sky-500/20 text-sm cursor-pointer flex items-center gap-2"
+                      className="px-6 py-3 btn-shimmer hover:opacity-90 text-white font-bold rounded-xl transition-all duration-200 shadow-[0_0_20px_rgba(14,165,233,0.35)] text-sm cursor-pointer flex items-center gap-2"
                     >
                       {t.usePrompt}
                     </button>
                     <button
                       type="button"
                       onClick={() => onSelectItem(activeHeroItem)}
-                      className="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-zinc-650 text-zinc-200 hover:text-white font-bold rounded-xl transition-all duration-200 text-sm cursor-pointer flex items-center gap-2"
+                      className="px-6 py-3 bg-zinc-950/60 hover:bg-zinc-900/80 border border-white/10 hover:border-white/20 text-zinc-200 hover:text-white font-bold rounded-xl transition-all duration-200 text-sm cursor-pointer flex items-center gap-2"
                     >
                       {t.inspectArchitecture}
                     </button>
@@ -353,7 +365,10 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           
           {/* LEFT PANE - Sticky Sidebar (25% Width) */}
-          <aside className="w-full lg:w-80 shrink-0 sticky top-24 self-start max-h-[calc(100vh-8rem)] overflow-y-auto bg-zinc-900/40 backdrop-blur-md border border-zinc-800/80 p-6 rounded-3xl shadow-2xl custom-scrollbar space-y-6">
+          <aside 
+            onMouseMove={handleMouseMove}
+            className="w-full lg:w-80 shrink-0 sticky top-24 self-start max-h-[calc(100vh-8rem)] overflow-y-auto glass-premium cursor-glow-border border-white/5 p-6 rounded-3xl shadow-2xl custom-scrollbar space-y-6"
+          >
             
             <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
               <div className="flex items-center gap-2">
@@ -525,7 +540,8 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                 {exploreItems.map((item) => (
                   <div
                     key={item.metadata.id}
-                    className="group relative flex flex-col w-full bg-zinc-900/30 backdrop-blur-md border border-zinc-800/80 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:border-zinc-700/80 transition-all duration-300 [&>*]:break-inside-avoid-column"
+                    onMouseMove={handleMouseMove}
+                    className="group relative flex flex-col w-full glass-premium cursor-glow-border border-white/5 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 [&>*]:break-inside-avoid-column hover:-translate-y-1"
                   >
                     {/* Image container & overlay triggers */}
                     <div

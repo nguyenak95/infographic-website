@@ -26,7 +26,7 @@ export const TRANSLATIONS = {
     heroTitlePart1: "Agentic",
     heroTitlePart2: "Infographic",
     heroTitlePart3: "Intelligence",
-    heroDesc: "A massive, searchable database of domain contexts, visual styles, and structural layouts. Build beautiful, highly-customized infographics instantly using the AI Agent Skill, calling different providers (NotebookLM, Google AI Studio, Antigravity, or OpenAI) to compile high-fidelity graphics.",
+    heroDesc: "AI Agents are brilliant at text and code, but historically struggle with visual structures. This skill solves that by equipping your agents with a complete spatial design system. Stop getting plain markdown lists—generate professional, high-fidelity infographics instantly through direct chat.",
     heroCtaHowItWorks: "How it Works",
     heroCtaGallery: "View Showcase Gallery",
 
@@ -58,6 +58,16 @@ export const TRANSLATIONS = {
     feature3Desc: "Aesthetic guidelines and prompt formatting rules that dictate the final visual output.",
     feature4Title: "Validation & Gathering",
     feature4Desc: "Intelligent prompting that stops to ask for missing information before generating.",
+
+    // integration
+    integrationTitle: "Equip Your AI Agent in 10 Seconds",
+    integrationDesc: "Install this skill directly into your favorite agent workspace. Once linked, your AI Agent can autonomously compile these high-res designs directly from your chat.",
+    integrationInstallBtn: "Copy Install Command",
+    integrationPathsTitle: "Supported Agent Workspaces",
+    integrationAntigravityDesc: "Link folders in `~/.gemini/antigravity/skills/` for automatic asset discovery.",
+    integrationClaudeDesc: "Place skill subfolders in `.claude/skills/` inside your project directory.",
+    integrationCursorDesc: "Place skill folders in `.cursor/skills/` or link in Cursor Settings panel.",
+    integrationGeminiDesc: "Link folder using terminal command: `gemini skills link <path>`.",
 
     // how it works
     howItWorksTitle: "How It Works",
@@ -130,6 +140,7 @@ export const TRANSLATIONS = {
     footerOpenSource: "Open Source",
     footerAiCompatible: "AI Agent Compatible",
     footerFree: "Completely Free",
+    footerContributeNote: "Have a custom layout style, domain context, or new structural blueprint? We welcome visual template contributions! Submit a Pull Request on GitHub.",
   },
   vi: {
     // metadata
@@ -148,7 +159,7 @@ export const TRANSLATIONS = {
     heroTitlePart1: "Agentic",
     heroTitlePart2: "Infographic",
     heroTitlePart3: "Intelligence",
-    heroDesc: "Cơ sở dữ liệu khổng lồ, dễ dàng tìm kiếm về domain contexts, visual styles và layouts cấu trúc. Tạo các infographic đẹp mắt, độ tùy biến cao tức thì bằng AI Agent Skill, gọi các API provider khác nhau (NotebookLM, Google AI Studio, Antigravity, hoặc OpenAI) để compile các đồ họa high-fidelity.",
+    heroDesc: "AI Agent lập trình và viết lách rất giỏi, nhưng lại cực kỳ dở trong việc vẽ sơ đồ trực quan. Skill này giải quyết điều đó bằng cách trang bị cho Agent một hệ thống thiết kế không gian chuyên nghiệp. Hãy dừng việc nhận về các danh sách Markdown tẻ nhạt—tạo các infographic high-fidelity tức thì qua chat.",
     heroCtaHowItWorks: "How It Works",
     heroCtaGallery: "Xem Gallery Trưng Bày",
 
@@ -180,6 +191,16 @@ export const TRANSLATIONS = {
     feature3Desc: "Các hướng dẫn thẩm mỹ và quy tắc định dạng prompt quyết định output trực quan cuối cùng.",
     feature4Title: "Validation & Gathering",
     feature4Desc: "Prompting thông minh tự động dừng để thu thập thông tin còn thiếu trước khi tiến hành generate hình ảnh.",
+
+    // integration
+    integrationTitle: "Trang bị cho AI Agent của bạn trong 10 giây",
+    integrationDesc: "Cài đặt skill này trực tiếp vào không gian làm việc của Agent bạn thích. Sau khi liên kết, AI Agent có thể tự động tạo ra các thiết kế đồ họa sắc nét trực tiếp qua chat.",
+    integrationInstallBtn: "Sao Chép Lệnh Cài Đặt",
+    integrationPathsTitle: "Không Gian Tương Thích",
+    integrationAntigravityDesc: "Liên kết các thư mục trong `~/.gemini/antigravity/skills/` để tự động kích hoạt.",
+    integrationClaudeDesc: "Đặt các thư mục con của skill vào thư mục `.claude/skills/` trong dự án của bạn.",
+    integrationCursorDesc: "Đặt các thư mục skill vào `.cursor/skills/` hoặc liên kết trong Cài đặt Cursor.",
+    integrationGeminiDesc: "Liên kết thư mục bằng lệnh Terminal: `gemini skills link <path>`.",
 
     // how it works
     howItWorksTitle: "How It Works",
@@ -252,6 +273,7 @@ export const TRANSLATIONS = {
     footerOpenSource: "Open Source",
     footerAiCompatible: "AI Agent Compatible",
     footerFree: "Completely Free",
+    footerContributeNote: "Bạn có phong cách bố cục thiết kế riêng, domain context hoặc bản vẽ cấu trúc mới? Chúng tôi rất hoan nghênh các đóng góp template! Hãy gửi Pull Request trên GitHub.",
   },
   es: {
     // metadata
@@ -270,7 +292,7 @@ export const TRANSLATIONS = {
     heroTitlePart1: "Inteligencia",
     heroTitlePart2: "Infográfica",
     heroTitlePart3: "Agentic",
-    heroDesc: "Una base de datos masiva y de búsqueda de contextos de dominio, estilos visuales y diseños estructurales. Cree infografías hermosas y altamente personalizadas al instante utilizando la habilidad del Agente de IA, llamando a diferentes proveedores (NotebookLM, Google AI Studio, Antigravity o OpenAI) para compilar gráficos de alta fidelidad.",
+    heroDesc: "Los agentes de IA son brillantes con el texto y el código, pero históricamente luchan con las estructuras visuales. Esta habilidad resuelve eso equipando a sus agentes con un sistema de diseño espacial completo. Deje de recibir listas de markdown simples: genere infografías profesionales y de alta fidelidad al instante a través del chat directo.",
     heroCtaHowItWorks: "Cómo Funciona",
     heroCtaGallery: "Ver Galería de Muestras",
 
@@ -302,6 +324,16 @@ export const TRANSLATIONS = {
     feature3Desc: "Pautas estéticas y reglas de formato de prompt que dictan el resultado visual final.",
     feature4Title: "Validación y Recopilación",
     feature4Desc: "Preguntas inteligentes que se detienen para solicitar la información faltante antes de generar.",
+
+    // integration
+    integrationTitle: "Equipa a tu Agente de IA en 10 Segundos",
+    integrationDesc: "Instale esta habilidad directamente en su espacio de trabajo de agente favorito. Una vez vinculado, su Agente de IA puede compilar estos diseños de alta resolución directamente desde el chat.",
+    integrationInstallBtn: "Copiar Comando de Instalación",
+    integrationPathsTitle: "Espacios de Trabajo Compatibles",
+    integrationAntigravityDesc: "Vincule carpetas en `~/.gemini/antigravity/skills/` para el descubrimiento automático.",
+    integrationClaudeDesc: "Coloque las subcarpetas de habilidades en `.claude/skills/` dentro de su proyecto.",
+    integrationCursorDesc: "Coloque las carpetas en `.cursor/skills/` o vincúlelas en la Configuración de Cursor.",
+    integrationGeminiDesc: "Vincule la carpeta usando el comando: `gemini skills link <path>`.",
 
     // how it works
     howItWorksTitle: "Cómo Funciona",
@@ -374,5 +406,6 @@ export const TRANSLATIONS = {
     footerOpenSource: "Código Abierto",
     footerAiCompatible: "Compatible con Agente de IA",
     footerFree: "Completamente Gratis",
+    footerContributeNote: "¿Tiene un estilo de diseño personalizado, contexto de dominio o nuevo plano estructural? ¡Agradecemos las contribuciones de plantillas visuales! Envíe un Pull Request en GitHub.",
   }
 } as const;

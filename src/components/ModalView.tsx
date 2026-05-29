@@ -14,6 +14,15 @@ export const ModalView: React.FC<ModalViewProps> = ({ lang = 'en', item, onClose
 
   const t = TRANSLATIONS[lang];
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   const [activeTab, setActiveTab] = useState<'visuals' | 'blueprint' | 'trigger'>('visuals');
   
   // Tab 1: Zoom State
@@ -123,10 +132,13 @@ export const ModalView: React.FC<ModalViewProps> = ({ lang = 'en', item, onClose
       />
 
       {/* Modal Box */}
-      <div className="relative w-full max-w-5xl bg-zinc-900 border border-zinc-800 rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+      <div 
+        onMouseMove={handleMouseMove}
+        className="relative w-full max-w-5xl glass-premium cursor-glow-border border-white/5 rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
+      >
         
         {/* Header */}
-        <div className="p-6 md:px-8 bg-zinc-900 border-b border-zinc-800 flex justify-between items-start">
+        <div className="p-6 md:px-8 bg-transparent border-b border-white/5 flex justify-between items-start">
           <div className="text-left">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest">
@@ -151,7 +163,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ lang = 'en', item, onClose
         </div>
 
         {/* Tab Controls Navigation */}
-        <div className="bg-zinc-950 px-6 md:px-8 border-b border-zinc-800 flex gap-4">
+        <div className="bg-black/40 px-6 md:px-8 border-b border-white/5 flex gap-4">
           {(['visuals', 'blueprint', 'trigger'] as const).map((tab) => (
             <button
               key={tab}

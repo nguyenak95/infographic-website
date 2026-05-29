@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Features from '../../components/Features.astro';
+import Integration from '../../components/Integration.astro';
 import HowItWorks from '../../components/HowItWorks.astro';
 import { GalleryContainer } from '../../components/GalleryContainer.tsx';
 import Footer from '../../components/Footer.astro';
@@ -22,6 +23,7 @@ const t = TRANSLATIONS[lang];
 <Layout lang={lang} title={t.metaTitle} description={t.metaDesc}>
   <Hero lang={lang} />
   <Features lang={lang} />
+  <Integration lang={lang} />
   <HowItWorks lang={lang} />
   <GalleryContainer client:load lang={lang} />
   <Footer lang={lang} />

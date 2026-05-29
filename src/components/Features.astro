@@ -20,10 +20,10 @@ const t = TRANSLATIONS[lang];
     </p>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 w-full relative z-10">
     <!-- Card 1 -->
-    <div class="bg-zinc-900/50 rounded-3xl p-8 lg:p-10 border border-zinc-800 shadow-xl shadow-black/50 hover:-translate-y-2 transition-all duration-300 group">
-      <div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+    <div class="glass-premium cursor-glow-border rounded-3xl p-8 lg:p-10 border border-white/5 shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group">
+      <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 border border-white/10 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(14,165,233,0.1)] group-hover:shadow-[0_0_25px_rgba(14,165,233,0.35)]">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary group-hover:text-white transition-colors"><path d="M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M3 15h6"/><path d="M3 18h6"/><path d="M3 12h6"/></svg>
       </div>
       <h3 class="text-2xl font-bold text-foreground mb-4">{t.feature1Title}</h3>
@@ -31,60 +31,80 @@ const t = TRANSLATIONS[lang];
         {t.feature1Desc}
       </p>
       <div class="flex flex-wrap gap-2">
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">SaaS</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">E-commerce</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Healthcare</span>
+        <span class="px-3 py-1 bg-sky-500/10 text-sky-400 text-sm font-semibold rounded-full border border-sky-500/20">SaaS</span>
+        <span class="px-3 py-1 bg-sky-500/10 text-sky-400 text-sm font-semibold rounded-full border border-sky-500/20">E-commerce</span>
+        <span class="px-3 py-1 bg-sky-500/10 text-sky-400 text-sm font-semibold rounded-full border border-sky-500/20">Healthcare</span>
       </div>
     </div>
 
     <!-- Card 2 -->
-    <div class="bg-zinc-900/50 rounded-3xl p-8 lg:p-10 border border-zinc-800 shadow-xl shadow-black/50 hover:-translate-y-2 transition-all duration-300 group">
-      <div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary group-hover:text-white transition-colors"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+    <div class="glass-premium cursor-glow-border rounded-3xl p-8 lg:p-10 border border-white/5 shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group">
+      <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 border border-white/10 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(99,102,241,0.1)] group-hover:shadow-[0_0_25px_rgba(99,102,241,0.35)]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-indigo-400 group-hover:text-white transition-colors"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
       </div>
       <h3 class="text-2xl font-bold text-foreground mb-4">{t.feature2Title}</h3>
       <p class="text-foreground/70 leading-relaxed mb-8">
         {t.feature2Desc}
       </p>
       <div class="flex flex-wrap gap-2">
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Timeline</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Flowchart</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Comparison</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Process</span>
+        <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-sm font-semibold rounded-full border border-indigo-500/20">Timeline</span>
+        <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-sm font-semibold rounded-full border border-indigo-500/20">Flowchart</span>
+        <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-sm font-semibold rounded-full border border-indigo-500/20">Comparison</span>
+        <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-sm font-semibold rounded-full border border-indigo-500/20">Process</span>
       </div>
     </div>
 
     <!-- Card 3 -->
-    <div class="bg-zinc-900/50 rounded-3xl p-8 lg:p-10 border border-zinc-800 shadow-xl shadow-black/50 hover:-translate-y-2 transition-all duration-300 group">
-      <div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary group-hover:text-white transition-colors"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>
+    <div class="glass-premium cursor-glow-border rounded-3xl p-8 lg:p-10 border border-white/5 shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group">
+      <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 border border-white/10 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(168,85,247,0.1)] group-hover:shadow-[0_0_25px_rgba(168,85,247,0.35)]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-purple-400 group-hover:text-white transition-colors"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72Z"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>
       </div>
       <h3 class="text-2xl font-bold text-foreground mb-4">{t.feature3Title}</h3>
       <p class="text-foreground/70 leading-relaxed mb-8">
         {t.feature3Desc}
       </p>
       <div class="flex flex-wrap gap-2">
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Glassmorphism</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Neumorphism</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Minimalism</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Isometric</span>
+        <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-sm font-semibold rounded-full border border-purple-500/20">Glassmorphism</span>
+        <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-sm font-semibold rounded-full border border-purple-500/20">Neumorphism</span>
+        <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-sm font-semibold rounded-full border border-purple-500/20">Minimalism</span>
+        <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-sm font-semibold rounded-full border border-purple-500/20">Isometric</span>
       </div>
     </div>
 
     <!-- Card 4 -->
-    <div class="bg-zinc-900/50 rounded-3xl p-8 lg:p-10 border border-zinc-800 shadow-xl shadow-black/50 hover:-translate-y-2 transition-all duration-300 group">
-      <div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center mb-6 border border-zinc-700 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary group-hover:text-white transition-colors"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+    <div class="glass-premium cursor-glow-border rounded-3xl p-8 lg:p-10 border border-white/5 shadow-2xl hover:-translate-y-1.5 transition-all duration-300 group">
+      <div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center mb-6 border border-white/10 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.1)] group-hover:shadow-[0_0_25px_rgba(16,185,129,0.35)]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400 group-hover:text-white transition-colors"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
       </div>
       <h3 class="text-2xl font-bold text-foreground mb-4">{t.feature4Title}</h3>
       <p class="text-foreground/70 leading-relaxed mb-8">
         {t.feature4Desc}
       </p>
       <div class="flex flex-wrap gap-2">
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Interactive</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Fallback</span>
-        <span class="px-3 py-1 bg-sky-900/30 text-sky-400 text-sm font-medium rounded-full border border-sky-800/50">Safety checks</span>
+        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-sm font-semibold rounded-full border border-emerald-500/20">Interactive</span>
+        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-sm font-semibold rounded-full border border-emerald-500/20">Fallback</span>
+        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-sm font-semibold rounded-full border border-emerald-500/20">Safety checks</span>
       </div>
     </div>
   </div>
+
+  <script is:inline>
+    // Cursor Coordinate border-glow tracking (Aesthetics C)
+    const initCursorGlow = () => {
+      document.querySelectorAll('.cursor-glow-border').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+    };
+    
+    // Support Astro SPA transition lifecycle triggers
+    initCursorGlow();
+    document.addEventListener('astro:page-load', initCursorGlow);
+  </script>
+</section>
 </section>
