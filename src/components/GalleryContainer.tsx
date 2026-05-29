@@ -2,8 +2,13 @@ import React, { useState, useMemo } from 'react';
 import { INFOGRAPHICS } from '../data/infographics';
 import { GalleryView } from './GalleryView';
 import type { Infographic } from '../data/types';
+import type { Language } from '../i18n/translations';
 
-export const GalleryContainer: React.FC = () => {
+interface GalleryContainerProps {
+  lang?: Language;
+}
+
+export const GalleryContainer: React.FC<GalleryContainerProps> = ({ lang = 'en' }) => {
   // 5 State Hooks
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeDomain, setActiveDomain] = useState<string>('All');
@@ -152,6 +157,7 @@ export const GalleryContainer: React.FC = () => {
 
   return (
     <GalleryView
+      lang={lang}
       featuredItems={featuredItems}
       exploreItems={filteredExploreItems}
       activeFilters={{

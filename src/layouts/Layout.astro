@@ -1,16 +1,19 @@
 ---
 import '../styles/global.css';
+import { TRANSLATIONS, type Language } from '../i18n/translations';
 
 interface Props {
   title: string;
   description: string;
+  lang?: Language;
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang = 'en' } = Astro.props;
+const t = TRANSLATIONS[lang];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -23,19 +26,34 @@ const { title, description } = Astro.props;
     <!-- Navbar (Simplified) -->
     <nav class="fixed top-0 left-0 right-0 z-50 px-4 py-4 md:px-8 bg-background/80 backdrop-blur-md border-b border-zinc-800/50">
       <div class="w-full flex items-center justify-between">
-        <a href="/" class="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
+        <a href={lang === 'en' ? '/' : `/${lang}/`} class="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
           <span class="text-primary text-2xl">⚡</span>
-          AI Agent Infographics
+          {t.logoText}
         </a>
         <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-300">
-          <a href="#features" class="hover:text-primary transition-colors duration-200">Features</a>
-          <a href="#how-it-works" class="hover:text-primary transition-colors duration-200">How it Works</a>
-          <a href="#gallery" class="hover:text-primary transition-colors duration-200">Gallery</a>
+          <a href="#features" class="hover:text-primary transition-colors duration-200">{t.navFeatures}</a>
+          <a href="#how-it-works" class="hover:text-primary transition-colors duration-200">{t.navHowItWorks}</a>
+          <a href="#gallery" class="hover:text-primary transition-colors duration-200">{t.navGallery}</a>
         </div>
         <div class="flex items-center gap-4">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hidden sm:flex text-zinc-300 hover:text-primary transition-colors duration-200">
-            GitHub
+          <a href="https://github.com/nguyenak95/smart-infographic" target="_blank" rel="noopener noreferrer" class="hidden sm:flex text-zinc-300 hover:text-primary transition-colors duration-200 mr-2">
+            {t.navGithub}
           </a>
+          <!-- Language Selector Dropdown -->
+          <div class="relative inline-block text-left">
+            <select
+              onchange="window.location.pathname = this.value"
+              class="bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-805 rounded-xl px-3 py-1.5 text-xs font-semibold focus:outline-none focus:border-primary transition-colors cursor-pointer appearance-none pr-8 border-zinc-800"
+              aria-label="Language Selector"
+            >
+              <option value="/" selected={lang === 'en'}>🇺🇸 EN</option>
+              <option value="/vi/" selected={lang === 'vi'}>🇻🇳 VI</option>
+              <option value="/es/" selected={lang === 'es'}>🇪🇸 ES</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2.5 text-zinc-500">
+              <svg class="fill-current h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            </div>
+          </div>
         </div>
       </div>
     </nav>

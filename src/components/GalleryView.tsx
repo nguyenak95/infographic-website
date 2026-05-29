@@ -2,6 +2,7 @@ import React from 'react';
 import type { Infographic } from '../data/types';
 import { X, Copy, CheckCircle2, Search, RotateCcw, Filter, Layout, Info, Compass } from 'lucide-react';
 import { ModalView } from './ModalView';
+import { TRANSLATIONS, type Language } from '../i18n/translations';
 
 interface ShowcaseDetail {
   whyItWorks: string;
@@ -48,6 +49,7 @@ const SHOWCASE_DETAILS: Record<string, ShowcaseDetail> = {
 };
 
 export interface GalleryViewProps {
+  lang?: Language;
   featuredItems: Infographic[];
   exploreItems: Infographic[];
   activeFilters: {
@@ -75,6 +77,7 @@ export interface GalleryViewProps {
 }
 
 export const GalleryView: React.FC<GalleryViewProps> = ({
+  lang = 'en',
   featuredItems,
   exploreItems,
   activeFilters,
@@ -89,6 +92,8 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
   onCopyPrompt,
   onSelectFeaturedHero,
 }) => {
+  const t = TRANSLATIONS[lang];
+
   // Active Featured Hero Details
   const activeHeroItem = featuredItems.find(item => item.metadata.id === activeFeaturedHeroId) || featuredItems[0];
   const activeHeroDetails = activeHeroItem ? SHOWCASE_DETAILS[activeHeroItem.metadata.id] : null;
@@ -156,16 +161,15 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
   };
 
   return (
-    <section id="gallery" className="w-full mx-auto py-24 md:py-32 px-4 md:px-8 bg-zinc-950">
+    <section id="gallery" className="w-full mx-auto py-24 md:py-32 px-4 md:px-8 bg-zinc-955">
       
       {/* 1. Header Title */}
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-6xl font-black tracking-tight text-zinc-50 mb-6">
-          Interactive Gallery
+          {t.galleryTitle}
         </h2>
         <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-          Browse real-world infographics generated via our AI Agent Skill, calling different providers (NotebookLM, Google AI Studio, Antigravity IDE, or OpenAI) to compile beautiful visual designs.
-          Click to see the structure, style, and prompt behind each design.
+          {t.galleryDesc}
         </p>
       </div>
 
@@ -174,8 +178,8 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
         <div className="mb-24">
           <div className="flex items-center gap-2.5 mb-8">
             <span className="h-2 w-2 rounded-full bg-sky-500 animate-pulse" />
-            <h3 className="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-950/40 border border-sky-900/50 px-3 py-1 rounded-full">
-              Premium Showcase
+            <h3 className="text-xs font-bold uppercase tracking-widest text-sky-400 bg-sky-950/40 border border-sky-900/50 px-3 py-1 rounded-full text-left">
+              {t.premiumShowcase}
             </h3>
           </div>
 
@@ -189,7 +193,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent z-1 bg-cover bg-center" style={{ backgroundImage: `url(${activeHeroItem.image_path})`, filter: 'blur(30px) opacity(0.15)' }} />
 
                 {/* Infographic Main Image */}
-                <div className="w-full h-full flex items-center justify-center p-6 bg-zinc-950/80 z-0">
+                <div className="w-full h-full flex items-center justify-center p-6 bg-zinc-955 z-0">
                   <img
                     src={activeHeroItem.image_path}
                     alt={activeHeroItem.metadata.title}
@@ -202,8 +206,8 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                   <div className="space-y-6">
                     <div className="flex flex-wrap gap-2.5">
                       {activeHeroItem.metadata.visualStyle?.aspectRatio && (
-                        <span className="text-xs font-mono font-bold px-3 py-1 bg-zinc-900 text-zinc-300 border border-zinc-800 rounded-lg">
-                          Aspect: {activeHeroItem.metadata.visualStyle.aspectRatio}
+                        <span className="text-xs font-mono font-bold px-3 py-1 bg-zinc-900 text-zinc-300 border border-zinc-805 rounded-lg border-zinc-800">
+                          {t.aspect}{activeHeroItem.metadata.visualStyle.aspectRatio}
                         </span>
                       )}
                       <span className="text-xs font-semibold px-3 py-1 bg-sky-950 text-sky-400 border border-sky-900/50 rounded-lg uppercase">
@@ -228,7 +232,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                         <div className="space-y-4">
                           <div className="border-l-4 border-sky-500 pl-4 py-0.5">
                             <span className="text-xs text-sky-400 font-bold uppercase tracking-wider block mb-1">
-                              Why it's great for demos
+                              {t.whyGreatForDemos}
                             </span>
                             <p className="text-sm text-zinc-300 leading-relaxed">
                               {activeHeroDetails.whyItWorks}
@@ -237,7 +241,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
 
                           <div>
                             <span className="text-xs text-zinc-500 font-bold uppercase tracking-wider block mb-1">
-                              Expected Output
+                              {t.expectedOutput}
                             </span>
                             <p className="text-sm text-zinc-300 leading-relaxed">
                               {activeHeroDetails.expectedOutput}
@@ -249,13 +253,13 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                         <div className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-5 relative flex flex-col justify-between">
                           <div>
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-xs text-zinc-500 font-bold uppercase tracking-wider">
-                                Verbatim Agent Prompt
+                              <span className="text-xs text-zinc-500 font-bold uppercase tracking-wider text-left">
+                                {t.verbatimPrompt}
                               </span>
                               <button
                                 type="button"
                                 onClick={() => onCopyPrompt(activeHeroDetails.demoPrompt)}
-                                className="p-1.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white rounded-lg border border-zinc-700 transition-colors cursor-pointer"
+                                className="p-1.5 bg-zinc-850 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded-lg border border-zinc-805 transition-colors cursor-pointer border-zinc-800"
                                 title="Copy Prompt"
                               >
                                 {copied ? <CheckCircle2 size={14} className="text-green-400" /> : <Copy size={14} />}
@@ -266,8 +270,8 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                             </p>
                           </div>
 
-                          <div className="text-[10px] text-zinc-500 mt-2">
-                            Click copy button to grab verbatim prompt.
+                          <div className="text-[10px] text-zinc-500 mt-2 text-left">
+                            {t.clickCopy}
                           </div>
                         </div>
                       </div>
@@ -281,21 +285,21 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                       onClick={() => handleUsePrompt(activeHeroDetails?.demoPrompt || activeHeroItem.prompt)}
                       className="px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white font-bold rounded-xl transition-all duration-200 shadow-lg shadow-sky-500/20 text-sm cursor-pointer flex items-center gap-2"
                     >
-                      Use Prompt
+                      {t.usePrompt}
                     </button>
                     <button
                       type="button"
                       onClick={() => onSelectItem(activeHeroItem)}
                       className="px-6 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-zinc-650 text-zinc-200 hover:text-white font-bold rounded-xl transition-all duration-200 text-sm cursor-pointer flex items-center gap-2"
                     >
-                      Inspect Architecture
+                      {t.inspectArchitecture}
                     </button>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Right Column - Stack of 6 Thumbnails */}
+            {/* Right Column - Stack of 7 Thumbnails */}
             <div className="space-y-4 max-h-[500px] lg:max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
               {featuredItems.map((item) => {
                 const isActive = item.metadata.id === activeFeaturedHeroId;
@@ -306,7 +310,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                     className={`group flex items-center gap-4 p-3 bg-zinc-900/35 backdrop-blur-md rounded-2xl border transition-all duration-300 cursor-pointer ${
                       isActive
                         ? 'border-sky-500/80 bg-zinc-900/80 shadow-[0_0_15px_rgba(14,165,233,0.15)] translate-x-1'
-                        : 'border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/50'
+                        : 'border-zinc-805 hover:border-zinc-700 hover:bg-zinc-900/50'
                     }`}
                   >
                     {/* Small thumbnail preview image */}
@@ -319,7 +323,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                       />
                     </div>
 
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 text-left">
                       <div className="flex items-center justify-between gap-2 mb-1.5">
                         <span className="text-[10px] font-bold px-2 py-0.5 bg-zinc-800 text-zinc-400 border border-zinc-750 rounded-md uppercase tracking-wider">
                           {item.metadata.domain}
@@ -332,7 +336,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                         {item.metadata.title}
                       </h4>
                       <p className="text-[11px] text-zinc-500 truncate mt-1">
-                        Complexity: <span className="font-semibold text-purple-400/90">{item.metadata.complexity}</span>
+                        {t.complexityLabel}<span className="font-semibold text-purple-400/90">{item.metadata.complexity}</span>
                       </p>
                     </div>
                   </div>
@@ -359,19 +363,19 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                 </h3>
               </div>
               <span className="text-xs font-semibold px-2 py-1 bg-zinc-800 text-zinc-400 border border-zinc-750 rounded-md">
-                60 Templates
+                60 {t.templatesLabelExplore}
               </span>
             </div>
 
             {/* A. Search Box */}
-            <div className="space-y-2">
+            <div className="space-y-2 text-left">
               <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
-                Keyword Search
+                {t.keywordSearch}
               </label>
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search title, prompt, tags..."
+                  placeholder={t.searchPlaceholder}
                   value={activeFilters.search}
                   onChange={(e) => onFilterChange('search', e.target.value)}
                   className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-sky-500 transition-colors text-sm"
@@ -381,9 +385,9 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
             </div>
 
             {/* B. Domain Checkboxes */}
-            <div className="space-y-2">
+            <div className="space-y-2 text-left">
               <label className="text-xs font-bold uppercase tracking-widest text-zinc-500">
-                Core Domains
+                {t.coreDomains}
               </label>
               <div className="flex flex-col gap-1.5">
                 {filterOptions.domains.map(domain => {
@@ -398,7 +402,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                     >
                       <div className="flex items-center gap-3">
                         <input
-                          type="checkbox"
+                           type="checkbox"
                           checked={isActive}
                           onChange={() => onFilterChange('domain', isActive ? 'All' : domain)}
                           className="w-4 h-4 rounded text-sky-500 focus:ring-sky-500 bg-zinc-950 border-zinc-800 cursor-pointer accent-sky-500"
@@ -417,9 +421,9 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
             </div>
 
             {/* C. Complexity chips */}
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 text-left">
               <label className="text-xs font-bold uppercase tracking-widest text-zinc-500 block">
-                Complexity Level
+                {t.complexityLevel}
               </label>
               <div className="flex flex-wrap gap-2">
                 {['All', ...filterOptions.complexities].map(comp => {
@@ -442,9 +446,9 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
             </div>
 
             {/* D. Aspect Ratio shape previews */}
-            <div className="space-y-2.5">
+            <div className="space-y-2.5 text-left">
               <label className="text-xs font-bold uppercase tracking-widest text-zinc-500 block">
-                Aspect Ratio
+                {t.aspectRatioLabel}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {['All', ...filterOptions.aspectRatios].map(ratio => {
@@ -456,7 +460,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                       onClick={() => onFilterChange('aspectRatio', ratio)}
                       className={`flex flex-col items-center justify-center gap-1.5 p-2 rounded-xl border text-[11px] font-semibold transition-all duration-200 cursor-pointer ${
                         isActive
-                          ? 'bg-sky-950/45 text-sky-400 border-sky-500/80 shadow-[0_0_10px_rgba(14,165,233,0.15)] font-bold'
+                          ? 'bg-sky-955 text-sky-400 border-sky-500/80 shadow-[0_0_10px_rgba(14,165,233,0.15)] font-bold bg-sky-950/40'
                           : 'bg-zinc-800/40 text-zinc-400 border-zinc-700 hover:border-zinc-650'
                       }`}
                     >
@@ -469,17 +473,17 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
             </div>
 
             {/* E. Layout Structure Dropdown */}
-            <div className="space-y-2">
+            <div className="space-y-2 text-left">
               <label className="text-xs font-bold uppercase tracking-widest text-zinc-500 block">
-                Layout Structure
+                {t.layoutStructure}
               </label>
               <div className="relative">
                 <select
                   value={activeFilters.dataType}
                   onChange={(e) => onFilterChange('dataType', e.target.value)}
-                  className="w-full bg-zinc-950 border border-zinc-800 text-zinc-300 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sky-500 appearance-none cursor-pointer"
+                  className="w-full bg-zinc-950 border border-zinc-805 text-zinc-305 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-sky-505 appearance-none cursor-pointer border-zinc-800 text-zinc-300"
                 >
-                  <option value="All">All Structures</option>
+                  <option value="All">{t.allStructures}</option>
                   {filterOptions.dataTypes.map(type => (
                     <option key={type} value={type}>
                       {type}
@@ -493,10 +497,10 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
             </div>
 
             {/* Results count & dynamic reset */}
-            <div className="pt-4 border-t border-zinc-800 space-y-3">
+            <div className="pt-4 border-t border-zinc-800 space-y-3 text-left">
               <div className="flex items-center justify-between text-xs font-semibold text-zinc-500">
-                <span>Total Matches:</span>
-                <span className="text-zinc-200 font-bold">{exploreItems.length} templates</span>
+                <span>{t.totalMatches}</span>
+                <span className="text-zinc-200 font-bold">{exploreItems.length} {t.templatesLabel}</span>
               </div>
 
               {isFilterActive && (
@@ -506,7 +510,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                   className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-zinc-850 hover:bg-zinc-850/80 border border-zinc-750 hover:border-zinc-700 text-zinc-200 hover:text-white rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer shadow-md"
                 >
                   <RotateCcw size={13} />
-                  Clear All Filters
+                  {t.clearAllFilters}
                 </button>
               )}
             </div>
@@ -552,7 +556,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                           <h4 className="text-sm font-bold text-zinc-50 leading-tight mb-2">
                             {item.metadata.title}
                           </h4>
-                          <p className="text-[11px] text-zinc-400 line-clamp-4 leading-relaxed italic bg-zinc-950/50 p-2 rounded-lg border border-zinc-900/50">
+                          <p className="text-[11px] text-zinc-400 line-clamp-4 leading-relaxed italic bg-zinc-955 p-2 rounded-lg border border-zinc-900/50 bg-zinc-950/50">
                             "{item.prompt}"
                           </p>
                         </div>
@@ -563,7 +567,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                             onClick={(e) => { e.stopPropagation(); onSelectItem(item); }}
                             className="flex-1 text-center py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 hover:text-white rounded-lg text-xs font-bold transition-colors cursor-pointer"
                           >
-                            Inspect Specs
+                            {t.inspectSpecs}
                           </button>
                           <button
                             type="button"
@@ -578,7 +582,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
                     </div>
 
                     {/* ALWAYS VISIBLE bottom metadata bar */}
-                    <div className="p-4 border-t border-zinc-850/80 bg-zinc-900/10 flex flex-col gap-2.5">
+                    <div className="p-4 border-t border-zinc-850/80 bg-zinc-900/10 flex flex-col gap-2.5 text-left">
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-wider">
                           {item.metadata.id}
@@ -597,14 +601,14 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
             ) : (
               <div className="text-center py-24 bg-zinc-900/20 border border-zinc-800 rounded-3xl p-8">
                 <Info size={40} className="mx-auto text-zinc-600 mb-4" />
-                <p className="text-zinc-400 text-lg font-bold">No infographic templates match your filters.</p>
-                <p className="text-zinc-650 text-sm mt-1">Try resetting the sidebar query or categories.</p>
+                <p className="text-zinc-400 text-lg font-bold">{t.noMatchesTitle}</p>
+                <p className="text-zinc-650 text-sm mt-1">{t.noMatchesDesc}</p>
                 <button
                   type="button"
                   onClick={onResetFilters}
                   className="mt-6 px-5 py-2.5 bg-sky-500 hover:bg-sky-400 text-white font-bold rounded-xl text-xs transition-all duration-200 cursor-pointer shadow-md"
                 >
-                  Reset All Filters
+                  {t.resetFilters}
                 </button>
               </div>
             )}
@@ -618,6 +622,7 @@ export const GalleryView: React.FC<GalleryViewProps> = ({
       {/* 4. Detail Modal Popup Overlay */}
       {selectedItem && (
         <ModalView
+          lang={lang}
           item={selectedItem}
           onClose={() => onSelectItem(null)}
         />

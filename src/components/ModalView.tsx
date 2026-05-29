@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import type { Infographic } from '../data/types';
 import { X, Copy, Check, ZoomIn, ZoomOut, RotateCcw, Download, Sparkles } from 'lucide-react';
+import { TRANSLATIONS, type Language } from '../i18n/translations';
 
 interface ModalViewProps {
+  lang?: Language;
   item: Infographic | null;
   onClose: () => void;
 }
 
-export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
+export const ModalView: React.FC<ModalViewProps> = ({ lang = 'en', item, onClose }) => {
   if (!item) return null;
+
+  const t = TRANSLATIONS[lang];
 
   const [activeTab, setActiveTab] = useState<'visuals' | 'blueprint' | 'trigger'>('visuals');
   
@@ -61,6 +65,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
     if (navigator?.clipboard?.writeText) {
       navigator.clipboard.writeText(hex)
         .then(() => {
+          copiedColorHex;
           setCopiedColorHex(hex);
           setTimeout(() => setCopiedColorHex(null), 1500);
         })
@@ -113,7 +118,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
       {/* Backdrop */}
       <button
         type="button"
-        className="absolute inset-0 w-full h-full bg-zinc-950/80 backdrop-blur-md cursor-pointer border-none"
+        className="absolute inset-0 w-full h-full bg-zinc-955/80 backdrop-blur-md cursor-pointer border-none bg-zinc-950/80"
         onClick={onClose}
       />
 
@@ -122,7 +127,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
         
         {/* Header */}
         <div className="p-6 md:px-8 bg-zinc-900 border-b border-zinc-800 flex justify-between items-start">
-          <div>
+          <div className="text-left">
             <div className="flex items-center gap-2 mb-2">
               <span className="text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest">
                 ID: {item.metadata.id}
@@ -157,9 +162,9 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                   : 'border-transparent text-zinc-500 hover:text-zinc-300'
               }`}
             >
-              {tab === 'visuals' && '1. High-Res Visuals'}
-              {tab === 'blueprint' && '2. AI Design DNA Blueprint'}
-              {tab === 'trigger' && '3. Trigger AI Agent'}
+              {tab === 'visuals' && (lang === 'vi' ? '1. Hình ảnh độ phân giải cao' : lang === 'es' ? '1. Visuales de Alta Resolución' : '1. High-Res Visuals')}
+              {tab === 'blueprint' && (lang === 'vi' ? '2. Bản thiết kế thiết kế AI DNA' : lang === 'es' ? '2. Plano del ADN del Diseño de IA' : '2. AI Design DNA Blueprint')}
+              {tab === 'trigger' && (lang === 'vi' ? '3. Kích hoạt AI Agent' : lang === 'es' ? '3. Activar Agente de IA' : '3. Trigger AI Agent')}
             </button>
           ))}
         </div>
@@ -195,7 +200,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                     title="Reset Zoom"
                   >
                     <RotateCcw size={13} />
-                    <span>Reset ({Math.round(zoomScale * 100)}%)</span>
+                    <span>{(lang === 'vi' ? 'Đặt lại' : lang === 'es' ? 'Restablecer' : 'Reset')} ({Math.round(zoomScale * 100)}%)</span>
                   </button>
                 </div>
 
@@ -205,7 +210,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                   className="px-4 py-2 bg-primary hover:bg-primary/95 text-white font-bold text-xs rounded-xl flex items-center gap-2 cursor-pointer shadow-md"
                 >
                   <Download size={13} />
-                  Download Asset
+                  {(lang === 'vi' ? 'Tải Xuống Ảnh' : lang === 'es' ? 'Descargar Imagen' : 'Download Asset')}
                 </a>
               </div>
 
@@ -236,7 +241,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
               {/* Row 1: Color DNA Swatches */}
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-3 text-left">
-                  Color DNA Swatches
+                  {(lang === 'vi' ? 'Mẫu Bảng Màu DNA' : lang === 'es' ? 'Muestras de ADN de Color' : 'Color DNA Swatches')}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {colors.map((hex) => {
@@ -279,17 +284,21 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                 {/* Typography Guidelines */}
                 <div className="bg-zinc-950 border border-zinc-800 p-5 rounded-2xl space-y-4 text-left">
                   <h4 className="text-[11px] font-black uppercase tracking-widest text-zinc-500 border-b border-zinc-805 pb-2 border-zinc-800">
-                    Typography Guidelines
+                    {t.typographyTitle}
                   </h4>
                   <div className="space-y-3.5">
                     <div>
-                      <span className="text-[10px] text-zinc-500 block font-bold uppercase">Heading Hierarchy</span>
+                      <span className="text-[10px] text-zinc-500 block font-bold uppercase">
+                        {(lang === 'vi' ? 'Phân Cấp Tiêu Đề' : lang === 'es' ? 'Jerarquía de Títulos' : 'Heading Hierarchy')}
+                      </span>
                       <p className="text-sm text-zinc-300 font-bold font-mono">
                         {item.metadata.visualStyle?.style_framework?.typography?.headings || 'Montserrat Bold, Open Sans Semibold'}
                       </p>
                     </div>
                     <div>
-                      <span className="text-[10px] text-zinc-500 block font-bold uppercase">Body Copy Legibility</span>
+                      <span className="text-[10px] text-zinc-500 block font-bold uppercase">
+                        {(lang === 'vi' ? 'Độ Đọc Được Của Nội Dung' : lang === 'es' ? 'Legibilidad del Texto' : 'Body Copy Legibility')}
+                      </span>
                       <p className="text-sm text-zinc-300 font-mono">
                         {item.metadata.visualStyle?.style_framework?.typography?.body || 'Lato Regular, Roboto Regular'}
                       </p>
@@ -300,15 +309,19 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                 {/* Technical Tone details */}
                 <div className="bg-zinc-950 border border-zinc-800 p-5 rounded-2xl space-y-4 text-left">
                   <h4 className="text-[11px] font-black uppercase tracking-widest text-zinc-500 border-b border-zinc-805 pb-2 border-zinc-800">
-                    Material Surface Treatments
+                    {t.surfacesTitle}
                   </h4>
                   <div className="space-y-3.5 text-xs text-zinc-300">
                     <div>
-                      <strong className="text-zinc-400 block font-semibold mb-0.5">Component Shapes:</strong>
+                      <strong className="text-zinc-400 block font-semibold mb-0.5">
+                        {(lang === 'vi' ? 'Hình Dạng Thành Phần:' : lang === 'es' ? 'Formas del Componente:' : 'Component Shapes:')}
+                      </strong>
                       <span>{item.metadata.visualStyle?.style_framework?.surface_treatments?.shapes || 'Standard flowchart glyphs and rounded squares'}</span>
                     </div>
                     <div>
-                      <strong className="text-zinc-400 block font-semibold mb-0.5">Depth Scale & Borders:</strong>
+                      <strong className="text-zinc-400 block font-semibold mb-0.5">
+                        {(lang === 'vi' ? 'Tỉ Lệ Độ Sâu & Viền:' : lang === 'es' ? 'Escala de Profundidad y Bordes:' : 'Depth Scale & Borders:')}
+                      </strong>
                       <span>{item.metadata.visualStyle?.style_framework?.surface_treatments?.depth_and_borders || 'Subtle drop shadows, clean borders matching accents'}</span>
                     </div>
                   </div>
@@ -318,9 +331,9 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
 
               {/* Row 3: Interactive Spatial Grid Map Mockup */}
               {item.metadata.visualStyle?.layout_template?.spatial_mapping && (
-                <div className="bg-zinc-950 border border-zinc-800 p-6 rounded-3xl space-y-4">
+                <div className="bg-zinc-955 border border-zinc-800 p-6 rounded-3xl space-y-4 bg-zinc-950">
                   <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2 text-left">
-                    Interactive Grid Spatial Blueprint
+                    {t.gridStructureTitle}
                   </h4>
                   
                   {/* CSS Layout grid representing zones */}
@@ -328,7 +341,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                     {Object.entries(item.metadata.visualStyle.layout_template.spatial_mapping).map(([zone, detail]) => (
                       <div
                         key={zone}
-                        className="bg-zinc-900 border border-zinc-800 p-4 rounded-xl flex items-start gap-4 hover:border-primary/50 transition-colors"
+                        className="bg-zinc-905 border border-zinc-800 p-4 rounded-xl flex items-start gap-4 hover:border-primary/50 transition-colors bg-zinc-900"
                       >
                         <span className="capitalize font-bold text-primary px-3 py-1 bg-primary/10 border border-primary/20 rounded-lg w-28 shrink-0 text-center">
                           {zone}
@@ -350,7 +363,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
               
               <div className="bg-zinc-955 border border-zinc-800 p-5 rounded-2xl bg-zinc-950">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4 text-left">
-                  Configure Trigger Prompt
+                  {(lang === 'vi' ? 'Cấu Hình Prompt Kích Hoạt' : lang === 'es' ? 'Configurar Prompt de Activación' : 'Configure Trigger Prompt')}
                 </h4>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -358,7 +371,9 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                   {/* Left Parameter Column */}
                   <div className="space-y-4 text-left">
                     <div>
-                      <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block mb-2">Subject Matter / Topic</span>
+                      <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block mb-2">
+                        {(lang === 'vi' ? 'Chủ Đề / Nội Dung' : lang === 'es' ? 'Tema / Asunto' : 'Subject Matter / Topic')}
+                      </span>
                       <input
                         type="text"
                         value={promptSubject}
@@ -369,7 +384,7 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                     </div>
 
                     <div>
-                      <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block mb-2">Complexity Level</span>
+                      <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block mb-2">{t.complexityLevel}</span>
                       <div className="flex gap-3">
                         {['Low', 'Medium', 'High'].map((comp) => (
                           <button
@@ -390,10 +405,14 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
 
                   {/* Right Parameter Column */}
                   <div className="space-y-4 text-left">
-                    <div className="flex items-center justify-between py-2 border-b border-zinc-900">
+                    <div className="flex items-center justify-between py-2 border-b border-zinc-905 border-zinc-900">
                       <div>
-                        <span className="text-xs font-bold text-zinc-300 block">Enforce Visual Guidelines</span>
-                        <span className="text-[10px] text-zinc-500">Instructs agent to match color, fonts and spatial layouts</span>
+                        <span className="text-xs font-bold text-zinc-300 block">
+                          {(lang === 'vi' ? 'Bắt Buộc Hướng Dẫn Trực Quan' : lang === 'es' ? 'Forzar Pautas Visuales' : 'Enforce Visual Guidelines')}
+                        </span>
+                        <span className="text-[10px] text-zinc-500">
+                          {(lang === 'vi' ? 'Chỉ dẫn agent khớp màu sắc, phông chữ và bố cục không gian' : lang === 'es' ? 'Instruye al agente a coincidir colores, fuentes y diseños espaciales' : 'Instructs agent to match color, fonts and spatial layouts')}
+                        </span>
                       </div>
                       <input
                         type="checkbox"
@@ -404,7 +423,9 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
                     </div>
 
                     <div>
-                      <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block mb-2">Custom Directives</span>
+                      <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block mb-2">
+                        {(lang === 'vi' ? 'Chỉ Thị Tùy Chỉnh' : lang === 'es' ? 'Directivas Personalizadas' : 'Custom Directives')}
+                      </span>
                       <input
                         type="text"
                         value={promptCustomDetails}
@@ -419,16 +440,18 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
               </div>
 
               {/* Dynamic Prompt Code Block */}
-              <div className="space-y-2">
+              <div className="space-y-2 text-left">
                 <div className="flex justify-between items-center">
-                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">Trigger Prompt (Copy & Send to AI Agent)</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+                    {(lang === 'vi' ? 'Prompt Kích Hoạt (Sao Chép & Gửi Tới AI Agent)' : lang === 'es' ? 'Prompt de Activación (Copiar y Enviar al Agente)' : 'Trigger Prompt (Copy & Send to AI Agent)')}
+                  </span>
                   <div className="flex gap-2">
                     <button
                       onClick={handleCopyPrompt}
                       className="px-4 py-2 bg-zinc-950 hover:bg-zinc-850 border border-zinc-800 hover:border-zinc-700 text-zinc-200 hover:text-white rounded-xl text-xs font-bold flex items-center gap-1.5 cursor-pointer shadow-md transition-colors"
                     >
                       {promptCopied ? <Check size={14} className="text-green-500" /> : <Copy size={14} />}
-                      <span>{promptCopied ? 'Copied Prompt!' : 'Copy Prompt'}</span>
+                      <span>{promptCopied ? (lang === 'vi' ? 'Đã Sao Chép!' : lang === 'es' ? '¡Copiado!' : 'Copied!') : (lang === 'vi' ? 'Sao Chép Prompt' : lang === 'es' ? 'Copiar Prompt' : 'Copy Prompt')}</span>
                     </button>
                   </div>
                 </div>
@@ -444,8 +467,10 @@ export const ModalView: React.FC<ModalViewProps> = ({ item, onClose }) => {
               <div className="bg-zinc-950/60 border border-zinc-800 p-4 rounded-xl flex gap-3 text-left">
                 <Sparkles size={18} className="text-primary shrink-0 mt-0.5" />
                 <div className="text-[11px] text-zinc-500">
-                  <span className="font-bold text-zinc-400 block mb-0.5">Triggering the Agent Skill</span>
-                  The `infographic-creator` AI Agent skill is instantly triggered when it detects this structured natural language prompt layout, calling different providers (NotebookLM, Google AI Studio, Antigravity, or OpenAI) to generate the graphic. Copy and paste the block above directly into your conversation with the AI Agent.
+                  <span className="font-bold text-zinc-400 block mb-0.5">
+                    {(lang === 'vi' ? 'Kích Hoạt Kỹ Năng Agent' : lang === 'es' ? 'Activando Habilidad del Agente' : 'Triggering the Agent Skill')}
+                  </span>
+                  {lang === 'vi' ? 'Kỹ năng AI Agent `infographic-creator` sẽ được kích hoạt ngay lập tức khi phát hiện bố cục prompt ngôn ngữ tự nhiên có cấu trúc này, gọi các nhà cung cấp khác nhau (NotebookLM, Google AI Studio, Antigravity hoặc OpenAI) để tạo hình ảnh. Sao chép và dán khối phía trên trực tiếp vào cuộc trò chuyện của bạn với AI Agent.' : lang === 'es' ? 'La habilidad del Agente de IA `infographic-creator` se activa instantáneamente cuando detecta este diseño de prompt estructurado en lenguaje natural, llamando a diferentes proveedores (NotebookLM, Google AI Studio, Antigravity o OpenAI) para generar el gráfico. Copie y pegue el bloque anterior directamente en su conversación con el Agente de IA.' : 'The `infographic-creator` AI Agent skill is instantly triggered when it detects this structured natural language prompt layout, calling different providers (NotebookLM, Google AI Studio, Antigravity, or OpenAI) to generate the graphic. Copy and paste the block above directly into your conversation with the AI Agent.'}
                 </div>
               </div>
 
